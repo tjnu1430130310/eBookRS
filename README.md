@@ -21,6 +21,8 @@
 
 ![](https://github.com/tjnu1430130310/eBookRS/blob/master/static/img/running/127.0.0.1_8000_books_12578_.png)
 
-![](https://github.com/tjnu1430130310/eBookRS/blob/master/static/img/running/127.0.0.1_8000_admin_.png)
-
 ![](https://github.com/tjnu1430130310/eBookRS/blob/master/static/img/running/%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90%E7%95%8C%E9%9D%A2.gif)
+
+使用默认的管理界面。
+
+![](https://github.com/tjnu1430130310/eBookRS/blob/master/static/img/running/127.0.0.1_8000_admin_.png)
