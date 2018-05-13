@@ -10,9 +10,14 @@
 同时，用户的打分可能并不与用户具体的情感相同，有时候评论中可能会参杂人类反讽的修辞，所以根据评论评分为标准的推荐不够准确，可能对推荐的电子书产生影响，需要对此进行排除，由此选择建立评论的情感分析模型，试着去理解那些好评和差评到底表达了什么。
 
 ## 系统运行界面
+
+系统页面美化工具选择使用直观简洁的前端开发框架Bootstrap4。使用Sass修改了Bootstrap4的颜色主题。
+
 ![](https://github.com/tjnu1430130310/eBookRS/blob/master/static/img/running/127.0.0.1_8000_.png)
 
 ![](https://github.com/tjnu1430130310/eBookRS/blob/master/static/img/running/127.0.0.1_8000_user_index.png)
+
+系统根据基于项目的协同过滤算法，为每一位用户实现基于项目相似性的电子书推荐，不同的用户个体，或者说不同的用户群体所接收到的电子书推荐意见并不完全相同，展现其个性化的一面。
 
 ![](https://github.com/tjnu1430130310/eBookRS/blob/master/static/img/running/127.0.0.1_8000_books_12578_.png)
 
