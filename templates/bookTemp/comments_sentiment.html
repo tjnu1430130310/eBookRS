@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<br /><br /><br /><br />
+<div class="container">
+    <div>
+         <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px;"></div>
+    <script type="text/javascript">
+        var created_time = {{ time|safe }}
+        var predicted_sentiment = {{ sentiment|safe }}
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            // 全局调色盘。
+            color: ['#563d7c'],
+            tooltip: {  // 鼠标悬浮弹窗提示 
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                }
+            },
+            legend: {
+                data:['情感数值']
+            },
+            xAxis: {
+                data: created_time
+            },
+            yAxis: {},
+            dataZoom: [
+                {   // 这个dataZoom组件，默认控制x轴。
+                    type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                    backgroundColor: 'rgba(#563d7c, 0)',  // 背景颜色
+                    // dataBackgroundColor: '#eee',  // 数据背景颜色
+                    // fillerColor: 'rgba(#563d7c, 0.2)',  // 填充颜色
+                    handleColor: '#563d7c'  // 手柄颜色
+                }
+            ],
+            series: [{
+                name: '情感数值',
+                type: 'line',
+                data: predicted_sentiment
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    </div>
+
+
+
+    <div>
+        {% for comment in commentsFromABook %}
+        <dl class="row my-4">
+            <dt class="col-sm-2"><p>{{ comment.predicted_sentiment }}</p></dt>
+            <dd class="col-sm-10">{{ comment.context }}
+                <dl class="row">
+                    <dt class="col-sm-4">评分</dt>
+                    <dd class="col-sm-8">{{ comment.score_rating }}</dd>
+                    <dt class="col-sm-4">提交时间</dt>
+                    <dd class="col-sm-8">{{ comment.created_time }}</dd>
+                </dl>
+            </dd>
+        </dl>
+        {% endfor %}
+    </div>
+
+        
+
+</div>
+{% endblock %}

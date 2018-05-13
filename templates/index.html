@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+        <br /><br />
+        <picture class="float-right"><img src="{% static 'img/macread.png' %}" width="300px"></picture>
+        <h1 class="display-3">电子书推荐系统</h1>
+        ​
+        <hr class="my-4">
+        <h5 class="text-primary">欢迎，机器学习包 GraphLab Create为您提供基于流行度和项目相似度的推荐服务。</h5>
+        <p>未来还将上线项目内容推荐、因式分解推荐和用于排名的分解推荐，一家人就是要整整齐齐。</p>
+    </div>
+</div>
+        {#    <a href='admin'>admin</a>#}
+        {#    <a href='HelloView'>Hello View</a>#}
+        {#    <a href='time'>time</a>#}
+        {#    <a href='times/plus/'>times plus</a>#}
+        {#    <a href='temp'>temp</a>#}
+        {#    <a href="search">搜索</a>#}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 my-4 text-center" style="height:200px; line-height:100px; ">
+            <i class="material-icons" style="font-size:100px;">whatshot</i>
+            <h4>流行度排榜</h4>
+        </div>
+    {% for book in pRbooks %}
+        <div class="col-md-3 my-4 text-center">
+            <div>
+                <img src="{{ book.image }}" style="width: 120px; height: 150px; background-color:rgba(#563d7c, .1);">
+            </div>
+
+            <h6 class="my-2">
+            {% for author in book.authors.all %}
+                <a href="/search/?q={{ author }}">{{ author }}</a>
+            {% endfor %}
+            </h6>
+
+            <h4><a href="/books/{{ book.id }}">{{ book.title }}</a></h4>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

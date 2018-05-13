@@ -1,0 +1,38 @@
+digraph a{
+// 影响图片级别的字体
+graph [fontname="Microsoft YaHei"];
+
+// 影响节点中的文字字体
+node [fontname="Microsoft YaHei"];
+
+// 影响箭头或线条上的文字字体
+edge [fontname="Microsoft YaHei"];
+
+label="建模代码流程图"
+fontname="Microsoft YaHei"
+rankdir="LR"
+
+// diamond 菱形; box 矩形; circle 圆形;
+
+"开始" [shape="circle"];
+"结束" [shape="circle"];
+
+"读取数据" [shape="box"];
+
+"划分数据" [shape="box"];
+"划分数据" -> "测试集" [label="划分"];
+"划分数据" -> "训练集" [label="划分"];
+
+"训练模型" [shape="box"];
+
+"保存模型" [shape="box"];
+
+"开始" -> "读取数据" -> "划分数据";
+
+"训练集" -> "训练模型" [label="训练"];
+
+"评估模型" [shape="box"];
+"测试集" -> "评估模型";
+
+"训练模型" -> "保存模型" -> "结束";
+}

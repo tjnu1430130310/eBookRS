@@ -1,0 +1,47 @@
+digraph a{
+// 影响图片级别的字体
+graph [fontname="Microsoft YaHei"];
+
+// 影响节点中的文字字体
+node [fontname="Microsoft YaHei"];
+
+// 影响箭头或线条上的文字字体
+edge [fontname="Microsoft YaHei"];
+
+label="机器学习工作流程图"
+fontname="Microsoft YaHei"
+rankdir="LR"
+
+// diamond 菱形; box 矩形; circle 圆形;
+
+"训练集数据" [shape="cylinder"];
+
+"特征提取" [shape="box"];
+
+"机器学习模型" [shape="box"];
+
+"";
+
+"机器学习算法" [shape="box"];
+
+"评估指标" [shape="box"];
+
+
+"训练集数据" -> "特征提取";
+"特征提取" -> "机器学习模型" [label="X", arrowhead="none"];
+
+
+"配置爬虫" -> "domains" [label="填写", arrowhead="none"];
+"配置爬虫" -> "scanUrls" [label="填写", arrowhead="none"];
+"配置爬虫" -> "contentUrlRegexes" [label="填写", arrowhead="none"];
+"配置爬虫" -> "enableJS" [label="填写", arrowhead="none"];
+"配置爬虫" -> "fileds" [label="填写", arrowhead="none"];
+
+"启动爬虫" [shape="box"];
+
+"结束爬取" [shape="box"];
+
+"下载数据" [shape="box"];
+
+"开始" -> "配置爬虫" -> "启动爬虫" -> "结束爬取" -> "下载数据" -> "结束";
+}

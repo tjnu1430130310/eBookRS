@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<br /><br /><br /><br />
+<div class="container">
+
+            {% block detail %}
+            <div>
+                <div>
+                    <img class="float-right" src="../../{{ book.image }}" style="width: 120px; height: 150px; background-color:rgba(#563d7c, .1);" />
+                </div>
+                <div class="my-4">作者：
+                    {% for author in book.authors.all %}
+                    &nbsp
+                    <a href="/search/?q={{ author }}">{{ author }}</a>
+                    &nbsp
+                    {% endfor %}
+                </div>
+                <h1>
+                    《{{ book.title }}》
+                </h1>
+
+                <div class="my-4">出版商：{{ book.publisher }}</div>
+                <div class="my-4">出版日期：{{ book.publication_date }}</div>
+                <div class="my-4">地址：<a href="{{ book.url }}">{{ book.url }}</a></div>
+                <div class="my-4"><i class="material-icons">show_chart</i><a href="/sentiment_comments/{{ book.id }}">查看评论情感分析报告</a></div>
+            </div>
+            {% endblock %}
+
+            <hr class="my-4">
+
+            {% block bookRecommender %}
+            <div class="row">
+                <div class="col-md-3 my-4 text-center" style="height:200px; line-height:100px; ">
+                    <i class="material-icons" style="font-size:100px;">mood</i>
+                    <h5>喜欢这本书的人</h5><h5>可能也喜欢</h5>
+                </div>
+                {% for sbook in sRbooks %}
+                <div class="col-md-3 my-4 text-center">
+                    <div>
+                        <img  src="../../{{ sbook.image }}" style="width: 120px; height: 150px; background-color:rgba(#563d7c, .1);">
+                     </div>
+            
+                    <h6 class="my-2">
+                        {% for author in sbook.authors.all %}
+                        <a href="/search/?q={{ author }}">{{ author }}</a>
+                        {% endfor %}
+                    </h6>
+            
+                    <h4><a href="/books/{{ sbook.id }}">{{ sbook.title }}</a></h4>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 my-4 text-center" style="height:200px; line-height:100px; ">
+                    <i class="material-icons" style="font-size:100px;">local_library</i>
+                    <h4>测试你的欧气</h4>
+                </div>
+                {% for rbook in randBooks %}
+                <div class="col-md-3  my-4">
+                    <div class="text-center">
+                        <img  src="../../{{ rbook.image }}" style="width: 120px; height: 150px; background-color:rgba(#563d7c, .1);">
+                    </div>
+                        
+                    <h6 align="center">
+                        {% for author in rbook.authors.all %}
+                        <a href="/search/?q={{ author }}">{{ author }}</a>
+                        {% endfor %}
+                    </h6>
+                        
+                    <h4 align="center"><a href="/books/{{ rbook.id }}">{{ rbook.title }}</a></h4>
+                </div>
+                {% endfor %}
+            </div>
+            {% endblock %}
+
+        <hr class="my-4">
+        
+        <div>
+            {% block CommentList %}
+
+
+                <h4>以下评论来自豆瓣，不可回复。</h4>
+                <p>回复也没人搭理你</p>
+                {% for comment in douban_comments %}
+                <div class="media my-4">
+                    <i class="material-icons" style="font-size:50px;">account_circle</i>
+                    <div class="media-body">
+                        <h5 class="mt-0"> @ {{ comment.username }}
+                            <time class="submit-date">{{ comment.created_time|date:"Y-m-d H:i" }}</time>
+                            给予 {{ comment.score_rating }} <i class="material-icons">star</i>
+                            并评论：
+                        </h5>
+                        {{ comment.context }}
+                    </div>
+                </div>
+                {% empty %}
+                暂无评论
+                {% endfor %}
+            {% endblock %}
+
+        </div><!--/.col-xs-12.col-sm-9-->
+
+</div>
+{% endblock %}

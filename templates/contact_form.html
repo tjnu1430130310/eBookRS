@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact us</title>
+
+    <style type="text/css">
+    ul.errorlist {
+        margin: 0;
+        padding: 0;
+    }
+    .errorlist li {
+        background-color: red;
+        color: white;
+        display: block;
+        font-size: 10px;
+        margin: 0 0 3px;
+        padding: 4px 5px;
+    }
+</style>
+
+</head>
+<body>
+
+    <h1>Contact us</h1>
+
+{#    {% if errors %}#}
+{#        <ul>#}
+{#            {% for error in errors %}#}
+{#            <li>{{ error }}</li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    {% endif %}#}
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+{#    <form action="/contact/" method="post">#}
+{#        <p>Subject: <input type="text" name="subject"></p>#}
+{#        <p>Your e-mail (optional): <input type="text" name="email"></p>#}
+{#        <p>Message: <textarea name="message" rows="10" cols="50"></textarea></p>#}
+{#        <input type="submit" value="Submit">#}
+{#    </form>#}
+
+    <form action="" method="post">
+        <br />{% csrf_token %}<br />
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>

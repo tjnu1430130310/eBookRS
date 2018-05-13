@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{#    {% extends "search_form.html" %}#}
+
+{#    {% if error %}#}
+        {# search_form()视图没有传递 error 变量，在使用 search_form 视图时不会显示错误信息 #}
+{#        <p style="color: red;">Please submit a search term.</p>#}
+{#    {% endif %}#}
+{##}
+{#    <form action="/search/" method="get">#}
+{#        <input type="text" name="q">#}
+{#        <input type="submit" value="Search">#}
+{#    </form>#}
+<br /><br /><br /><br />
+<div class="container">
+    {% block SearchResults %}
+        {% if not error%}
+
+        <p>您正在搜索：<strong>{{ q }}</strong></p>
+            {% if books %}
+            <p>发现 {{ books|length }} 本电子书。</p>
+            <div class="row">
+                {% for book in books %}
+                <div class="col-md-3 my-4 text-center">
+                    <div>
+                        <img  src="../{{ book.image }}" style="width: 120px; height: 150px; background-color:rgba(#563d7c, .1);">
+                    </div>
+
+                    <h6 class="my-2">
+                        {% for author in book.authors.all %}
+                        <a href="/search/?q={{ author }}">{{ author }}</a>
+                        {% endfor %}
+                    </h6>
+                    
+                    <h4><a href="/books/{{ book.id }}">{{ book.title }}</a></h4>
+                    
+                    <p>出版日期：{{ book.publication_date }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+                <p>没有书符合您的搜索条件，请您重新搜索。</p>
+            {% endif %}
+
+        {% endif %}
+    {% endblock %}
+</div>
+{% endblock %}

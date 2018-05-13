@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p class="error">Sorry, that's not a valid username or password</p>
+    {% endif %}
+
+    <style>
+        #container {
+            padding: 20px 20px 0;
+            background: #fff;
+            border: 0px solid #eaeaea;
+            border-radius: 4px;
+            overflow: hidden;
+            width: 28em;
+            min-width: 300px;
+            margin: 100px auto;
+        }
+        .form-row {
+            padding: 4px 0;
+            float: left;
+            width: 100%;
+            border-bottom: none;
+        }
+        .form-row label {
+            padding-right: 0.5em;
+            line-height: 2em;
+            font-size: 1em;
+            clear: both;
+            color: #563d7c;
+        }
+        .form-row #id_username, .form-row #id_password {
+            clear: both;
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #563d7c;
+            border-radius: 5px;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+        .form-row #id_username:focus, .form-row #id_password:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #957bbe;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(86, 61, 124, 0.25); }
+        .submit-row {
+            clear: both;
+            padding: 1em 0 0 9.4em;
+            margin: 0;
+            border: none;
+            background: none;
+            text-align: left;
+        }
+    </style>
+
+    <form action="{% url 'login' %}" method="post" id="container">
+        {% csrf_token %}
+
+        <div class="form-row">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+
+        <div class="form-row">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+        
+        <div class="submit-row">
+            <input type="hidden" name="next" value="{{ next|escape }}"/>
+            <input type="submit" value="登录" class="btn btn-outline-primary right"/>
+        </div>
+        
+    </form>
+
+{% endblock %}

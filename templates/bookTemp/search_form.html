@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search form</title>
+</head>
+<body>
+    {% if error %}
+        {# search_form()视图没有传递 error 变量，在使用 search_form 视图时不会显示错误信息 #}
+        <p style="color: red;">Please submit a search term.</p>
+    {% endif %}
+
+    <form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+
+{#    {% block SearchResults %}{% endblock %}#}
+</body>
+</html>

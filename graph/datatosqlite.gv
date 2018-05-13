@@ -1,0 +1,38 @@
+digraph datatosqlite{
+// 影响图片级别的字体
+graph [fontname="Microsoft YaHei"];
+// 影响节点中的文字字体
+node [fontname="Microsoft YaHei"];
+// 影响箭头或线条上的文字字体
+edge [fontname="Microsoft YaHei"];
+
+label="代码流程图";
+fontname="Microsoft YaHei";
+
+"开始" [shape="circle"];
+"结束" [shape="circle"];
+
+"连接数据库" [shape="box"];
+"关闭数据库" [shape="box"];
+
+"打开csv数据文件" [shape="box"];
+"读取数据" [shape="box"];
+
+"是否还有数据" [shape="diamond"];
+"遍历" [shape="box"];
+"结束遍历" [shape="box"];
+
+
+"开始" -> "连接数据库" -> "打开csv数据文件" -> "读取数据" -> "是否还有数据";
+
+"是否还有数据" -> "遍历" [label="是"];
+"是否还有数据" -> "结束遍历" [label="否"];
+"结束遍历" -> "关闭数据库" -> "结束";
+
+"存入Book表"
+
+"是否有出版日期"
+
+"存入Publisher表"
+
+}

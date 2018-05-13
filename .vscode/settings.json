@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "C:\\Anaconda2\\python.exe",
+    "python.linting.pylintPath": "pylint",
+    "python.linting.pylintArgs": [
+        "--load-plugins", "pylint_django",
+        "--disable-msg=C0103"
+    ],
+    "python.formatting.autopep8Path": "autopep8"
+}

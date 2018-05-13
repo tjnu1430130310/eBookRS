@@ -1,0 +1,59 @@
+﻿digraph crawlarcomment {
+// 影响图片级别的字体
+graph [fontname="Microsoft YaHei"];
+// 影响节点中的文字字体
+node [fontname="Microsoft YaHei"];
+// 影响箭头或线条上的文字字体
+edge [fontname="Microsoft YaHei"];
+
+label="爬虫代码流程图";
+fontname="Microsoft YaHei";
+rankdir="LR";
+
+"开始" [shape="circle"];
+"结束" [shape="circle"];
+
+"配置爬虫" [shape="box"];
+
+//"配置爬虫" -> "domains" [label="填写", arrowhead="none"];
+//"配置爬虫" -> "scanUrls" [label="填写", arrowhead="none"];
+//"配置爬虫" -> "contentUrlRegexes" [label="填写", arrowhead="none"];
+//"配置爬虫" -> "enableJS" [label="填写", arrowhead="none"];
+"配置爬虫" -> "fileds" [label="填写", arrowhead="none"];
+
+"启动爬虫" [shape="box"];
+
+"判断爬虫是否正常运行" [shape="diamond"]
+
+"爬虫运行中" [shape="box"];
+
+"结束爬取" [shape="box"];
+
+"下载数据" [shape="box"];
+
+"开始" -> "配置爬虫" -> "启动爬虫" -> "判断爬虫是否正常运行";
+"判断爬虫是否正常运行" -> "爬虫运行中" [label="是"];
+"判断爬虫是否正常运行" -> "结束爬取" [label="否"];
+"结束爬取" -> "下载数据" -> "结束";
+
+
+"抽取项comments" [shape="box"];
+
+"判断当前网页是否为内容页" [shape="diamond"];
+
+"添加到待爬取队列" [shape="box"];
+
+"获取评论总页数" [shape="box"];
+
+"将所有评论凑成HTML" [shape="box"];
+
+"将每页评论数组拼成一个评论数组" [shape="box"];
+
+
+"fileds" -> "抽取项comments" [label="编辑", arrowhead="none"];
+
+"爬虫运行中" -> "判断当前网页是否为内容页";
+"判断当前网页是否为内容页" -> "添加到待爬取队列" [label="是"];
+"添加到待爬取队列" -> "获取评论总页数" -> "将所有评论凑成HTML" -> "将每页评论数组拼成一个评论数组" -> "存储记录" -> "判断爬虫是否正常运行"
+
+}

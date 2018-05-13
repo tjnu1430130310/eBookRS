@@ -1,0 +1,48 @@
+// Custom.scss
+// 在 cmd 中使用 node-sass styles.scss styles.css 建立 Custom.css
+
+// 变量缺省值
+// Bootstrap 4 中的每个 Sass 变量都包含 !default 标签，这是允许您在自己的 Sass 中覆盖变量的默认值，而无需修改 Bootstrap 的源代码。根据需要复制和粘贴变量，修改其值，并删除 !default 标志。如果已经分配了一个变量，那么它将不会被 Bootstrap 中的默认值重新分配。
+// 相同 Sass 文件中的变量覆盖可以在默认变量之前或之后。但是，当覆盖 Sass 文件时，您的覆盖必须在导入 Bootstrap 的 Sass 文件之前。
+
+// Your variable overrides $body-bg: #000;
+$body-color: #563d7c; //  bootstrap中文网导航条用色
+// $body-color: #9A32CD;
+
+// 修改 $theme-colors map 的现有颜色
+$theme-colors: (
+  "primary": #563d7c
+);
+
+$navbar-light-color: rgba(#563d7c, .5) !default;
+// $navbar-dark-color: rgba(#563d7c, .5) !default;
+
+$navbar-light-active-color:  rgba(#563d7c, .9) !default;
+
+$navbar-light-toggler-border-color: rgba(#563d7c, .1) !default;
+
+
+$jumbotron-bg: rgba(#563d7c, .05) !default;
+
+
+
+
+
+
+// Bootstrap and its default variables
+
+    // Option A: Include all of Bootstrap 
+@import "node_modules/bootstrap/scss/bootstrap";
+
+    // Option B: Include parts of Bootstrap 
+// Required
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+// Optional
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/images";
+@import "node_modules/bootstrap/scss/code";
+@import "node_modules/bootstrap/scss/grid";

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+ 
+{% block title %}用户中心{% endblock %}
+ 
+{% block blog_active %}active{% endblock %}
+ 
+{% block content %}
+<br /><br /><br /><br />
+<div class="container">
+    <div>
+        <div>
+            <div class="float-right">
+                <i class="material-icons" style="font-size:150px">account_circle</i>
+            </div>
+            <dl class="row my-4">
+                
+                  
+                <dt class="col-sm-2">我的信息</dt>
+                <dd class="col-sm-10">
+                    <dl class="row">
+                        <dt class="col-sm-3 my-4">用户名</dt>
+                        <dd class="col-sm-9 my-4">{% if user.first_name %}{{user.first_name}}{%else%}{{user.username}}{%endif%}</dd>
+        
+                        <dt class="col-sm-3 my-4">注册邮箱</dt>
+                        <dd class="col-sm-9 my-4">{{user.email}}</dd>
+            
+                        <dt class="col-sm-3 my-4">注册日期</dt>
+                        <dd class="col-sm-9 my-4">{{user.date_joined|date:"Y-m-d H:i"}}</dd>
+                            
+                        <dt class="col-sm-3 my-4">最近登录</dt>
+                        <dd class="col-sm-9 my-4">{{user.last_login|date:"Y-m-d H:i"}}</dd>
+            
+                        <dt class="col-sm-3 my-4">评论次数</dt>
+                        <dd class="col-sm-9 my-4">{{ all_talk_about|length }}</dd>
+                    </dl>
+                </dd>
+
+                <dt class="col-sm-2">我的评论</dt>
+                <dd class="col-sm-12">
+                    <dl class="row">
+                        {% for talk in all_talk_about %}
+                        <dt class="col-sm-3 my-4">{{talk.created_time|date:"Y-m-d H:i"}}</dt>
+                        <dd class="col-sm-9 my-4">阅读了《<a href="/books/{{talk.book_id}}" target="_blank">{{talk.book}}</a>》,给予 {{ talk.score_rating }} <i class="material-icons">star</i>并评论：{{talk.context}}</dd>
+                        {% endfor %}
+                    </dl>
+                </dd>
+            </dl>
+
+            <div>
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px;"></div>
+    <script type="text/javascript">
+        var time = {{ time|safe }};
+        var rating = {{ rating|safe }};
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            // 全局调色盘。
+            color: ['#563d7c'],
+            tooltip: {},
+            legend: {
+                data:['评分']
+            },
+            xAxis: {
+                data: time
+            },
+            yAxis: {},
+            series: [{
+                name: '评分',
+                type: 'line',
+                data: rating
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+            </div>
+        </div>
+ 
+        <hr class="my-4">
+        <p class="text-right">阅读更多电子书，发表您的宝贵意见吧~ <a href="{% url 'index' %}" target="_blank">去看书&gt;&gt;</a></p>
+
+        <div class="row">
+            <div class="col-md-3 my-4 text-center" style="height:200px; line-height:100px; ">
+                <i class="material-icons" style="font-size:100px;">chrome_reader_mode</i>
+                <h4>也许你会喜欢</h4>
+            </div>
+                
+            {% for book in pRbooks %}
+            <div class="col-md-3 my-4 text-center">
+                <div>
+                    <img  src="{{ book.image }}" style="width: 120px; height: 150px; background-color:rgba(#563d7c, .1);">
+                </div>
+
+                <h6 class="my-2">
+                {% for author in book.authors.all %}
+                    <a href="/search/?q={{ author }}">{{ author }}</a>
+                {% endfor %}
+                </h6>
+
+                <h4><a href="/books/{{ book.id }}">{{ book.title }}</a></h4>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
